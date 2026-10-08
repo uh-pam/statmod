@@ -1,9 +1,10 @@
 # Colab round trip: the tester's checklist
 
 Test content only. This checklist covers the Colab leg of the smoke test for 5PAM2024
-*Statistical Modelling*: the round trip from GitHub through Colab to download, and the 14
+*Statistical Modelling*: the round trip from GitHub through Colab to download, the 14
 behaviours that Google's documentation leaves open, as listed in the module team's research
-notes on Colab.
+notes on Colab, and one more: the submission mode (observation 15). Observation 12 is a cohort
+test for week 1 or a rehearsal, not part of a single tester's session.
 
 **Rules for the record.** Write down what you see, word for word where a label or message
 matters. If something did not happen or was not checked, write "not observed" or "not checked":
@@ -43,11 +44,12 @@ into any AI prompt. Use a separate record sheet (section D) for each session, de
 | B18 | Open the downloaded file in a text editor and search for `Loaded T07` and `Using dataset T07` | Both found: the outputs and the dataset ID are saved in the file | Found or not (observation 10) |
 | B19 | In the downloaded file, search for `"colab"` and `"metadata"` | | Copy any `colab` metadata block that appears |
 
-## C. The 14 observations
+## C. The observations
 
-The numbers follow the research notes. Observations 3, 6 and 7 have a second stage that needs a
-further file on this test branch: send the downloaded file to the module team, who add it to the
-branch only after that push is approved.
+Observations 1 to 14 follow the research notes; observation 15 was added after the module's
+Gate 2 review. Observations 3, 6 and 7 have a second stage that needs a further file on this test
+branch: send the downloaded file to the module team, who add it to the branch only after that
+push is approved. **Observation 12 is not observed before Gate 2**: it needs the cohort.
 
 | No. | Observe | How | Record |
 |---|---|---|---|
@@ -62,9 +64,10 @@ branch only after that push is approved.
 | 9 | Idle behaviour at 60, 90 and 120 minutes; one full 3-hour session of normal use | Idle: after step B14, leave the tab alone. At 60, 90 and 120 minutes look at it **without clicking** (is there a "disconnected" or "reconnect" message?). At the end, add a cell `print(SEED)`: a `NameError` means the variables were lost. Separately, one 3-hour session of ordinary work | Minutes until disconnection, if any; what was lost (variables, outputs, the notebook itself); the 3-hour session's interruptions |
 | 10 | Unsaved GitHub view after a reload; the exact labels of Save a copy in Drive and Download .ipynb; outputs in the downloaded file | Steps B15 to B18 | As in those steps |
 | 11 | `#copy=true` on the Open in Colab link | Open the `#copy=true` link in `README.md` | Does a copy dialog appear? Its wording |
-| 12 | Thirteen near-simultaneous opens and raw-URL loads; any HTTP 429 | Only with the cohort, in the week-1 practice run: everyone opens the link and runs B2 to B4 at the same moment | How many loaded from the URL; any "Could not download" line and its reason (429?) |
+| 12 | Thirteen near-simultaneous opens and raw-URL loads; any HTTP 429. **Cohort test, in the week-1 practice run or a rehearsal; not a pre-Gate-2 observation** | Only with the cohort: everyone opens the link and runs B2 to B4 at the same moment | How many loaded from the URL; any "Could not download" line and its reason (429?) |
 | 13 | Cookie or `googleusercontent.com` blocking on the managed lab browser; whether Edge works | On a lab PC, open the link in each installed browser, Edge included; run B2 to B4 | Per browser: opens, connects, runs; any cookie or blocked-content warning |
 | 14 | Whether a Herts account can sign in to Colab (fact-finding only: the module uses personal accounts) | Try to open the link signed in with a university account | Allowed or refused; the message shown |
+| 15 | The submission run: what "Restart and run all" does with an unfinished exercise (this informs the module's `SUBMITTING` flag, which will turn unfinished exercises into notices so that the run completes) | In a saved copy, leave E1 unfinished and type `T07` in the DATASET ENTRY cell. (a) Use the menu item that restarts the session and runs all cells. (b) Note where execution stops. (c) Download the notebook as `.ipynb`; open it in a text editor and search for `Loaded T07` and `Using dataset T07` | The exact menu path and label for (a), word for word, and any keyboard shortcut shown; the cell where execution stopped and the message shown; whether the downloaded file holds the outputs of the cells that ran (both strings found or not) |
 
 ## D. Record sheet (copy once per session)
 
@@ -114,6 +117,7 @@ branch only after that push is approved.
 | 9 (idle 60 / 90 / 120 min) | | |
 | 9 (3-hour session) | | |
 | 11 | | |
-| 12 | | |
+| 12 (cohort test, week 1 or rehearsal) | | |
 | 13 | | |
 | 14 | | |
+| 15 (menu path; outputs kept?) | | |
