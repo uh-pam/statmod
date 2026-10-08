@@ -8,7 +8,7 @@ teaching material and no answers, and it will be deleted once the test is record
 
 | Path | What |
 |---|---|
-| `prototype_lab.ipynb` | The prototype lab notebook, with outputs and metadata cleared |
+| `prototype_lab.ipynb` | The prototype lab notebook, with outputs and metadata cleared. It opens in practice mode (`SUBMITTING = False`); `CHECKLIST.md` observation 15 tests the submission run |
 | `data/smoke_shared.csv` | 200 rows: the shared dataset that the formative steps load automatically |
 | `data/smoke_T07.csv` | 120 rows: the individual dataset behind the test ID `T07` |
 | `CHECKLIST.md` | The tester's step-by-step checklist and record sheet |

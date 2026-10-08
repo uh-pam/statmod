@@ -3,7 +3,7 @@
 Test content only. This checklist covers the Colab leg of the smoke test for 5PAM2024
 *Statistical Modelling*: the round trip from GitHub through Colab to download, the 14
 behaviours that Google's documentation leaves open, as listed in the module team's research
-notes on Colab, and one more: the submission mode (observation 15). Observation 12 is a cohort
+notes on Colab, and one more: the submission run with the `SUBMITTING` flag (observation 15). Observation 12 is a cohort
 test for week 1 or a rehearsal, not part of a single tester's session.
 
 **Rules for the record.** Write down what you see, word for word where a label or message
@@ -26,18 +26,18 @@ into any AI prompt. Use a separate record sheet (section D) for each session, de
 |---|---|---|---|
 | B1 | Open the **Open in Colab** link in `README.md` | The notebook opens in Colab, read from GitHub, with no sign-in to GitHub | Did it open? Any warning banner? Seconds until a runtime connected |
 | B2 | Run the first cell (VERSIONS) | It prints the run time, Python, platform, `In Colab True` and the package versions; any version that differs from the tested one is followed by "(tested with ...)" | Copy the whole output into the record sheet (observation 8) |
-| B3 | Run SET-UP, then SEED | "Set-up complete." and no error | Any warning text |
+| B3 | Run SET-UP, then SEED | "Set-up complete. Mode: practice (SUBMITTING = False): unfinished exercises stop with a message." and no error | Any warning text |
 | B4 | Run the cell that loads `shared` | "Loaded SHARED ..." with `source  https://raw.githubusercontent.com/...`; no "Could not download" line | The source line; any HTTP error (note any 429) |
 | B5 | Run the model, influence and plot cells | Tables of coefficients and ANOVA Types I, II and III; a table of the five largest Cook's distances; two plots | Any warning text (pink or grey output boxes) |
 | B6 | Run the exercise E1 cell unchanged | It stops with **one line**: `ExerciseNotDone: Exercise not finished: replace the ... in ...` | Was it one line, or a long traceback? |
 | B7 | Run the stretch cell unchanged | "Stretch S1 not attempted: skipped." | |
 | B8 | **Runtime > Run all**, with E1 still unfinished | Execution stops at the E1 cell with the same one-line message | Where did it stop? |
-| B9 | Complete E1 as its instruction says, and run it | "E1 recorded: PE ~ AT, n = 200" | |
+| B9 | Complete E1 and E2 as their instructions say and run them, then run F5 | "E1 recorded: PE ~ AT, n = 200"; "E2 passed: 200 residuals."; F5 prints "Slope of PE on AT from E1: ..." | |
 | B10 | Run the first assessed cell (below DATASET ENTRY) before entering an ID | `DatasetError: No valid dataset is loaded. Run the DATASET ENTRY cell ...` | |
 | B11 | Type `T99` between the quotes in the DATASET ENTRY cell and run it | `DatasetError: 'T99' is not a dataset ID for this lab ...` | |
 | B12 | Type `T07` and run the cell | "Loaded T07: smoke-test individual data T07 ...", `120 rows x 8 columns, 5893 bytes`, `sha256  df8c1fd9e4dc...46ce03f79` | Copy the four lines |
 | B13 | Run both assessed cells | Each starts "Using dataset T07 (sha256 df8c1fd9e4dc...)"; an ANOVA table, three Cook's distances, one plot titled "Dataset T07" | |
-| B14 | **Runtime > Restart session and run all** (exact label?) | Every cell runs, top to bottom, with no error | Exact menu label; any error |
+| B14 | **Runtime > Restart session and run all** (exact label?) | Every cell runs, top to bottom, with no error; the last code cell prints "SUMMARY (SUBMITTING = False)" | Exact menu label; any error |
 | B15 | Before saving a copy, reload the browser tab | | Did the edits (E1, `T07`) survive the reload? (observation 10) |
 | B16 | Save a copy in Drive (record the exact menu path and label) | A copy opens, titled "Copy of prototype_lab.ipynb" or similar | Exact label; the copy's title (observation 10) |
 | B17 | In the copy, **Restart session and run all**, then download the notebook as `.ipynb` (record the exact menu path) | A file `prototype_lab.ipynb` (or similar) downloads | Exact menu labels; the file name |
@@ -67,7 +67,7 @@ push is approved. **Observation 12 is not observed before Gate 2**: it needs the
 | 12 | Thirteen near-simultaneous opens and raw-URL loads; any HTTP 429. **Cohort test, in the week-1 practice run or a rehearsal; not a pre-Gate-2 observation** | Only with the cohort: everyone opens the link and runs B2 to B4 at the same moment | How many loaded from the URL; any "Could not download" line and its reason (429?) |
 | 13 | Cookie or `googleusercontent.com` blocking on the managed lab browser; whether Edge works | On a lab PC, open the link in each installed browser, Edge included; run B2 to B4 | Per browser: opens, connects, runs; any cookie or blocked-content warning |
 | 14 | Whether a Herts account can sign in to Colab (fact-finding only: the module uses personal accounts) | Try to open the link signed in with a university account | Allowed or refused; the message shown |
-| 15 | The submission run: what "Restart and run all" does with an unfinished exercise (this informs the module's `SUBMITTING` flag, which will turn unfinished exercises into notices so that the run completes) | In a saved copy, leave E1 unfinished and type `T07` in the DATASET ENTRY cell. (a) Use the menu item that restarts the session and runs all cells. (b) Note where execution stops. (c) Download the notebook as `.ipynb`; open it in a text editor and search for `Loaded T07` and `Using dataset T07` | The exact menu path and label for (a), word for word, and any keyboard shortcut shown; the cell where execution stopped and the message shown; whether the downloaded file holds the outputs of the cells that ran (both strings found or not) |
+| 15 | The submission run: with `SUBMITTING = True`, unfinished formative cells print a one-line NOTICE instead of stopping, the run reaches the end, the SUMMARY lists what was unfinished, the downloaded `.ipynb` keeps the assessed outputs, and an assessed failure still stops the run | Start from a **fresh** saved copy (open the Open in Colab link, then Save a copy in Drive), so that E1 and E2 are unfinished. (a) In the SET-UP cell change `SUBMITTING = False` to `SUBMITTING = True`. (b) Type `T07` between the quotes in the DATASET ENTRY cell. (c) Use the menu item that restarts the session and runs every cell (the module's instructions call it Runtime > "Restart session and run all"). Run no cell by hand first. (d) Expected: the run goes on to the last cell without stopping. The SET-UP output says `Mode: submission (SUBMITTING = True)`. The E1, E2 and F5 cells each show one line, beginning `NOTICE E1:`, `NOTICE E2:` and `NOTICE F5:`. The stretch cell prints "Stretch S1 not attempted: skipped.". Both assessed cells begin "Using dataset T07" and show the ANOVA table and the plot. The SUMMARY cell lists E1, E2 and F5 under "Not finished (3):" and ends "Assessed dataset: T07 (sha256 df8c1fd9...)". (e) Download the notebook as `.ipynb`, open it in a text editor and count how often each of these appears (each can come only from a saved output): `SUMMARY (SUBMITTING = True)` (once), `NOTICE E1` (once), `Loaded T07` (once), `Using dataset T07` (twice: once per assessed cell), `"image/png"` (twice: the F4 plot and the assessed plot), `Not finished (3)` (once). (f) Set the DATASET ENTRY back to `""` and repeat (c): the run must stop at the DATASET ENTRY cell with `DatasetError: No dataset ID yet. ...` (a failure in the assessed part is never turned into a notice) | The exact menu path and label used in (c), word for word, and any keyboard shortcut shown beside it; whether the run reached the SUMMARY cell; the three NOTICE lines and the SUMMARY output, copied verbatim; for each search string in (e), the number of times found; where the run in (f) stopped, and the message shown |
 
 ## D. Record sheet (copy once per session)
 
@@ -120,4 +120,4 @@ push is approved. **Observation 12 is not observed before Gate 2**: it needs the
 | 12 (cohort test, week 1 or rehearsal) | | |
 | 13 | | |
 | 14 | | |
-| 15 (menu path; outputs kept?) | | |
+| 15 (menu label; reached the SUMMARY?; NOTICE lines; search strings found; where (f) stopped) | | |
